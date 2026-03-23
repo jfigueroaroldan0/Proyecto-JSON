@@ -4,13 +4,13 @@ Fuente fichero JSON: https://github.com/openfootball/football.json/blob/master/2
 
 Se dispone de un fichero JSON que contiene información de la temporada 2024-25 de la Premier League inglesa. La estructura principal del JSON es la siguiente:
 
-name: nombre de la competición.
-rounds: lista de jornadas o rondas, cada una con:
-name: nombre de la jornada.
-matches: lista de partidos, donde cada partido tiene:
-date: fecha del partido.
-team1 y team2: nombres de los equipos.
-score: resultado con ft (full-time) indicando goles de cada equipo.
+name: nombre de la competición.  
+rounds: lista de jornadas o rondas, cada una con:  
+name: nombre de la jornada.  
+matches: lista de partidos, donde cada partido tiene:  
+date: fecha del partido.  
+team1 y team2: nombres de los equipos.  
+score: resultado con ft (full-time) indicando goles de cada equipo.  
 
 # Ejercicio 1 - Listar información
 
