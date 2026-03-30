@@ -1,3 +1,5 @@
 from funciones import *
 
-menu()
+data = load_json()
+
+menu(data)
