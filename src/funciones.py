@@ -1,28 +1,25 @@
 import json
-import sys
+import os
 
 # APERTURA FICHERO
 
 def load_json():
-    
-    path = "../data/premier_league-24-25.json"
-    
+
     try:
-        with open(path, "r", encoding="utf-8") as partidos:
-            data = json.load(partidos)
-            return data
+        with open("../data/premier_league-24-25.json", "r", encoding="utf-8") as partidos:
+            return json.load(partidos)
             
     except FileNotFoundError:
-        print(f"Error: No se encontró el archivo '{path}'")
+        print("Error: No se encontró el archivo")
         
     except PermissionError:
-        print(f"Error: Sin permisos para leer '{path}'")
+        print("Error: Sin permisos para leer el archivo")
         
     except json.JSONDecodeError as e:
-        print(f"Error: El archivo no es un JSON válido - {e}")
+        print(f"Error: JSON inválido - {e}")
         
     except OSError as e:
-        print(f"Error de sistema al abrir el archivo: {e}")
+        print(f"Error de sistema: {e}")
         
     return None
 
@@ -51,6 +48,9 @@ def menu(data):
             for team in get_teams(data):
                 print(team)
         
+        elif opcion == 2:
+            contar_partidos_por_jornada(data)
+        
         if opcion == 6:
             print("Saliendo del programa, ¡Hasta luego!")
             
@@ -67,7 +67,20 @@ def get_teams(data):
 
 # CONTAR INFORMACIÓN
 
+def contar_partidos_por_jornada(data):
 
+    jornadas = {}
+
+    for match in data["matches"]:
+        jornada = match["round"]
+
+        if jornada not in jornadas:
+            jornadas[jornada] = []
+            
+        jornadas[jornada].append(match)
+    
+    for jornada, partidos in jornadas.items():
+        print(f"{jornada}: {len(partidos)} partidos")
 
 # FILTRAR INFORMACIÓN
 
