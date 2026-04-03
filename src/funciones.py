@@ -51,6 +51,9 @@ def menu(data):
         elif opcion == 2:
             contar_partidos_por_jornada(data)
         
+        elif opcion == 3:
+            partidos_por_equipo(data)
+        
         if opcion == 6:
             print("Saliendo del programa, ¡Hasta luego!")
             
@@ -76,7 +79,7 @@ def contar_partidos_por_jornada(data):
 
         if jornada not in jornadas:
             jornadas[jornada] = []
-            
+
         jornadas[jornada].append(match)
     
     for jornada, partidos in jornadas.items():
@@ -84,7 +87,23 @@ def contar_partidos_por_jornada(data):
 
 # FILTRAR INFORMACIÓN
 
-
+def partidos_por_equipo(data):
+    equipoabuscar = input(">> Introduce el nombre del equipo: ")
+    
+    for match in data["matches"]:
+        
+        if match["team1"] == equipoabuscar or match["team2"] == equipoabuscar:
+            fecha = match["date"]
+            team1 = match["team1"]
+            team2 = match["team2"]
+            
+            if "score" in match:
+                resultado = f"{match['score']['ft'][0]} - {match['score']['ft'][1]}"
+                
+            else:
+                resultado = "Sin resultado"
+            
+            print(f"{fecha} | {team1} vs {team2} | {resultado}")
 
 # BUSCAR INFORMACIÓN RELACIONADA
 
