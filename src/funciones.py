@@ -1,6 +1,9 @@
 import json
 import os
 
+def linea_decorativa():
+    print("═" * 60)
+
 # APERTURA FICHERO
 
 def load_json():
@@ -38,8 +41,16 @@ def menu(data):
     
     opcion = 0
     
+    encabezado = "MENÚ GESTIÓN DE PARTIDOS PREMIER LEAGUE 24-25"
+    
     while opcion != 6:
+        
+        linea_decorativa()
+        print(encabezado.center(60))
+        linea_decorativa()
+        
         print(menu)
+        linea_decorativa()
         opcion = int(input(">> Introduce una opción (1-6): "))
         
         if opcion == 1:
@@ -53,6 +64,9 @@ def menu(data):
         
         elif opcion == 3:
             partidos_por_equipo(data)
+
+        elif opcion == 4:
+            victorias_equipo(data)
         
         if opcion == 6:
             print("Saliendo del programa, ¡Hasta luego!")
@@ -107,6 +121,19 @@ def partidos_por_equipo(data):
 
 # BUSCAR INFORMACIÓN RELACIONADA
 
-
+def victorias_equipo(data):
+    equipo = input("Equipo: ").strip().lower()
+ 
+    for partido in data["matches"]:
+        resultado = partido.get("score", {}).get("ft")
+        local = partido["team1"]
+        visitante = partido["team2"]
+        jornada = partido["round"]
+ 
+        if resultado:
+            if local.lower() == equipo and resultado[0] > resultado[1]:
+                print(f"{jornada} | Rival: {visitante} | {resultado[0]}-{resultado[1]}")
+            elif visitante.lower() == equipo and resultado[1] > resultado[0]:
+                print(f"{jornada} | Rival: {local} | {resultado[1]}-{resultado[0]}")
 
 # EQUIPO CON MÁS GOLES
