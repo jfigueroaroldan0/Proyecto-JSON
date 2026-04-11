@@ -51,25 +51,34 @@ def menu(data):
         
         print(menu)
         linea_decorativa()
-        opcion = int(input(">> Introduce una opción (1-6): "))
         
-        if opcion == 1:
-            get_teams(data)
+        try:
+            opcion = int(input(">> Introduce una opción (1-6): "))
+        
+            if opcion == 1:
+                
+                get_teams(data)
 
-            for team in get_teams(data):
-                print(team)
-        
-        elif opcion == 2:
-            contar_partidos_por_jornada(data)
-        
-        elif opcion == 3:
-            partidos_por_equipo(data)
+                for team in get_teams(data):
+                    print(team)
+            
+            elif opcion == 2:
+                contar_partidos_por_jornada(data)
+            
+            elif opcion == 3:
+                partidos_por_equipo(data)
 
-        elif opcion == 4:
-            victorias_equipo(data)
+            elif opcion == 4:
+                victorias_equipo(data)
+
+            elif opcion == 5:
+                maximo_goleador(data)
+            
+            elif opcion == 6:
+                print("Saliendo del programa, ¡Hasta luego!")
         
-        if opcion == 6:
-            print("Saliendo del programa, ¡Hasta luego!")
+        except:
+            print("Introduce una opción correcta")
             
 # LISTAR INFORMACIÓN
 
@@ -137,3 +146,30 @@ def victorias_equipo(data):
                 print(f"{jornada} | Rival: {local} | {resultado[1]}-{resultado[0]}")
 
 # EQUIPO CON MÁS GOLES
+
+def maximo_goleador(data):
+    goles_por_equipo = {}
+ 
+    for partido in data["matches"]:
+        resultado = partido.get("score", {}).get("ft")
+ 
+        if resultado:
+            equipo1 = partido["team1"]
+            equipo2 = partido["team2"]
+ 
+            if equipo1 not in goles_por_equipo:
+                goles_por_equipo[equipo1] = 0
+            goles_por_equipo[equipo1] += resultado[0]
+ 
+            if equipo2 not in goles_por_equipo:
+                goles_por_equipo[equipo2] = 0
+            goles_por_equipo[equipo2] += resultado[1]
+ 
+    equipo_maximo = ""
+    goles_maximo = 0
+    for equipo, goles in goles_por_equipo.items():
+        if goles > goles_maximo:
+            goles_maximo = goles
+            equipo_maximo = equipo
+ 
+    print(f"{equipo_maximo}: {goles_maximo} goles")
