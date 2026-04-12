@@ -36,3 +36,5 @@ Muestra jornada, rival y resultado de los partidos ganados por el equipo.
 
 Determina qué equipo ha marcado más goles en total hasta el momento (sumando todos los goles de cada partido) y muestra el total de goles.
 Imprime el nombre del equipo y número total de goles anotados.
+
+La principal dificultad que se ha tenido es entender bien la estructura de mi fichero JSON.
